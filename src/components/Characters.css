@@ -1,0 +1,19 @@
+.characters {
+  display: grid;
+ grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.card {
+  width: 250px;
+  height: 350px;
+  border: 2px solid black ;
+  border-radius: 25px;
+  margin: 15px;
+  overflow: hidden;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.image {
+  width: 250px;
+}
+
