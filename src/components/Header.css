@@ -1,0 +1,35 @@
+.header-dark {
+  background-color: #d3ffd8;
+}
+
+.header-light {
+  background-color: #4b4b4b;
+}
+
+.title {
+  font-size: 4rem;
+}
+
+.light {
+  color: #4ecca3;
+}
+
+.dark {
+  color: black;
+}
+
+.button {
+  border-radius: 7px;
+  height: 3rem;
+  padding: 0 1rem;
+}
+.button-dark {
+  background-color: #4b4b4b;
+  color:white;
+}
+
+.button-light {
+  /* background-color: white; */
+  background-color: #d3ffd8;
+  color:black;
+}
