@@ -5,7 +5,7 @@
 
 .card {
   width: 250px;
-  height: 350px;
+  height: 360px;
   border: 2px solid #4b4b4b ;
   border-radius: 25px;
   margin: 15px;
@@ -20,5 +20,23 @@
 
 p {
   font-size: 1.6rem;
+}
+
+button {
+  border-radius: 7px;
+  height: 2rem;
+  padding: 0 1rem;
+}
+
+.favourites-image-container {
+  width: 100%;
+  display: flex;
+}
+
+
+.favourites-image-container img {
+  width: 50px;
+  border-radius: 50%;
+  margin:0 5px;
 }
 
