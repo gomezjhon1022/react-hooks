@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useReducer, useMemo} from 'react'
+import React, { useState, useEffect, useContext, useReducer, useMemo, useRef} from 'react'
 import {ThemeContext} from '../context/ThemeContext';
 import './Characters.css';
 
@@ -22,6 +22,7 @@ const Characters = () => {
   const {theme} = useContext(ThemeContext);
   const [favourites,dispatch] = useReducer(favouriteReducer, initialState);
   const [search, setSearch] = useState('');
+  const searchInput = useRef(null);
   useEffect(() => {
     fetch('https://rickandmortyapi.com/api/character/')
       .then(response => response.json())
@@ -30,8 +31,8 @@ const Characters = () => {
   const handleClick = favourite => {
     dispatch ({type: 'ADD_TO_FAVOURITE', payload: favourite})
   }
-  const handleSearch = (event) => {
-    setSearch(event.target.value)
+  const handleSearch = () => {
+    setSearch(searchInput.current.value)
   }
   const filteredUsers = useMemo(() =>
   characters.filter((user) => {
@@ -43,7 +44,7 @@ const Characters = () => {
 
     <div className={theme?`header-dark`:`header-light`}>
       <div className='search'>
-        <input type="text" value={search} onChange={handleSearch}/>
+        <input type="text" value={search} ref={searchInput} onChange={handleSearch}/>
       </div>
       {favourites.favourites.length > 0 && <h1 className={theme?`dark`:`light`} >Favourites</h1>}
       <div className={'favourites-image-container'}>
