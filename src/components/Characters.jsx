@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useContext, useReducer, useMemo, useRef} from 'react'
+import React, { useState, useEffect, useContext, useReducer, useMemo, useRef, useCallback} from 'react'
 import {ThemeContext} from '../context/ThemeContext';
+import Search from './Search';
 import './Characters.css';
 
 const initialState = {
@@ -31,9 +32,9 @@ const Characters = () => {
   const handleClick = favourite => {
     dispatch ({type: 'ADD_TO_FAVOURITE', payload: favourite})
   }
-  const handleSearch = () => {
-    setSearch(searchInput.current.value)
-  }
+  const handleSearch = useCallback(() => {
+    setSearch(searchInput.current.value);
+  }, [])
   const filteredUsers = useMemo(() =>
   characters.filter((user) => {
     return user.name.toLowerCase().includes(search.toLowerCase());
@@ -43,9 +44,7 @@ const Characters = () => {
   return (
 
     <div className={theme?`header-dark`:`header-light`}>
-      <div className='search'>
-        <input type="text" value={search} ref={searchInput} onChange={handleSearch}/>
-      </div>
+      <Search search={search} searchInput={searchInput} handleSearch={handleSearch}/>
       {favourites.favourites.length > 0 && <h1 className={theme?`dark`:`light`} >Favourites</h1>}
       <div className={'favourites-image-container'}>
         {favourites.favourites.map(favourite => (
