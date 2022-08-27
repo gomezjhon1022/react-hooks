@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useContext, useReducer, useMemo, useRef, useCallback} from 'react'
+import React, { useState, useContext, useReducer, useMemo, useRef, useCallback} from 'react'
 import {ThemeContext} from '../context/ThemeContext';
 import Search from './Search';
 import './Characters.css';
+import useCharacters from '../hooks/useCharacters';
 
 const initialState = {
   favourites: [],
 }
+const API = 'https://rickandmortyapi.com/api/character/'
 const favouriteReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TO_FAVOURITE':
@@ -19,16 +21,11 @@ const favouriteReducer = (state, action) => {
 }
 
 const Characters = () => {
-  const [characters, setCharacters] = useState([]);
   const {theme} = useContext(ThemeContext);
   const [favourites,dispatch] = useReducer(favouriteReducer, initialState);
   const [search, setSearch] = useState('');
   const searchInput = useRef(null);
-  useEffect(() => {
-    fetch('https://rickandmortyapi.com/api/character/')
-      .then(response => response.json())
-      .then(data => setCharacters(data.results))
-  },[])
+  const characters = useCharacters(API);
   const handleClick = favourite => {
     dispatch ({type: 'ADD_TO_FAVOURITE', payload: favourite})
   }
