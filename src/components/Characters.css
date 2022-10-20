@@ -1,11 +1,13 @@
 .characters {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  justify-items: center;
+  gap: 20px;
 }
 
 .card {
   width: 250px;
-  height: 360px;
+  height: 370px;
   border: 2px solid #4b4b4b ;
   border-radius: 25px;
   margin: 15px;

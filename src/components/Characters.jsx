@@ -15,6 +15,11 @@ const favouriteReducer = (state, action) => {
         ...state,
         favourites: [...state.favourites, action.payload]
       };
+      case 'DELETE_TO_FAVOURITE':
+        return {
+          ...state,
+          favourites: [...state.favourites.slice(0,action.payload)]
+        };
     default:
       return state;
   }
@@ -28,6 +33,9 @@ const Characters = () => {
   const characters = useCharacters(API);
   const handleClick = favourite => {
     dispatch ({type: 'ADD_TO_FAVOURITE', payload: favourite})
+  }
+  const handleClickoff = favourite => {
+    dispatch ({type: 'DELETE_TO_FAVOURITE', payload: favourite})
   }
   const handleSearch = useCallback(() => {
     setSearch(searchInput.current.value);
@@ -55,7 +63,14 @@ const Characters = () => {
             <h2 >{character.name}</h2>
             <p>Especie: {character.species}</p>
             <p> Estatus: {character.status}</p>
-            <button type='button' onClick={() => handleClick(character)}>Agregar a favoritos</button>
+            { favourites.favourites.length >0
+              ?favourites.favourites.map(personaje => (
+                personaje.id===(character.id)
+                ?<button type='button'  onClick={() => handleClickoff(character)}>Eliminar de favoritos</button>
+                :<button type='button'  onClick={() => handleClick(character)}>Agregar a favoritos</button>
+              ))
+              :<button type='button'  onClick={() => handleClick(character)}>Agregar a favoritos</button>
+            }
           </div>
         ))}
       </div>
